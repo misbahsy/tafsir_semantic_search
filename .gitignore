@@ -1,2 +1,10 @@
 .env
+.env.*
 /venv
+venv*
+*.log
+
+__pycache__/
+*.swp
+.cache/
+.DS_Store
