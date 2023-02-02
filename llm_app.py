@@ -35,30 +35,37 @@ def retrieve(query):
         x['metadata']['text'] for x in xc['matches']
     ]
 
-   
+    # build our prompt with the retrieved contexts included
+    prompt_start = (
+        "Answer the Query based on the contexts, if it's not in the contexts say 'I don't know the answer'. \n\n"+
+        "Context:\n"
+    )
+    prompt_end = (
+        f"\n\nQuery: {query}\nAnswer in the language of Query, if Query is in English Answer in English. Please provide reference Quran verses."
+    )
     # append contexts until hitting limit
     for i in range(1, len(contexts)):
         if len("\n\n---\n\n".join(contexts[:i])) >= limit:
             prompt = (
-                " " +
-                "\n\n---\n\n".join(contexts[:i-1]) + " ")
+                prompt_start +
+                "\n\n---\n\n".join(contexts[:i-1]) +
+                prompt_end
+            )
             break
         elif i == len(contexts)-1:
             prompt = (
-                " " +
-                "\n\n---\n\n".join(contexts) + " ")
+                prompt_start +
+                "\n\n---\n\n".join(contexts) +
+                prompt_end
+            )
     return prompt
 
-
-query = st.text_area(":green[Enter Your :question: Question] :point_left:", help= " Ask the question about any topic in Quran",
-             height=100, placeholder="Heyy, What are you waiting for, Enter your Question")
-
-st.markdown("### if nothing is written in text box the above mentioned text is by default recommended to you")
+# st.markdown("### if nothing is written in text box the above mentioned text is by default recommended to you")
     
 
 # st.spinner("Searching for the answer")
-query_with_contexts = retrieve(query)
-query_with_contexts 
+# query_with_contexts = retrieve(query)
+# query_with_contexts 
 
 
 
@@ -80,7 +87,22 @@ def complete(prompt):
     )
     return res['choices'][0]['text'].strip()
 
-complete(query_with_contexts)
+# complete(query_with_contexts)
 # st.text(results)
 
 # st.markdown(results)
+
+results = ''
+
+with st.form("my_form"):
+    query = st.text_area(":green[Enter Your :question: Question] :point_left:", 
+                help= "Ask question on any topic in the Holy Quran",
+                height=100,
+                placeholder="Ask question on any topic in the Holy Quran")
+
+    submitted = st.form_submit_button("Submit")
+    if submitted:
+        query_with_contexts = retrieve(query)
+        results = complete(query_with_contexts)
+
+st.write(results)
