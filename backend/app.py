@@ -46,7 +46,7 @@ def retrieve(query):
         "Context:\n"
     )
     prompt_end = (
-        f"\n\nQuery: {query}\nAnswer in the language of Query, if Query is in English Answer in English."
+        f"\n\nQuery: {query}\nAnswer in the language of Query, if Query is in English Answer in English. Please provide reference Quran verses."
     )
     # append contexts until hitting limit
     for i in range(1, len(contexts)):
@@ -84,9 +84,9 @@ def predict():
     query = request.json.get("query")
     query_with_contexts = retrieve(query)
     print(query_with_contexts)
-    response = complete(query_with_contexts)
+    bot = complete(query_with_contexts)
 
-    return response
+    return {"bot": bot}
     
 if __name__ == '__main__':
     app.run(debug=True)
