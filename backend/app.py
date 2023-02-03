@@ -3,8 +3,10 @@ import cohere
 import pinecone
 import openai 
 import os
+from flask_cors import CORS
 from dotenv import load_dotenv
 load_dotenv()
+
 
 
 api_key = os.environ.get('api_key')
@@ -12,6 +14,7 @@ cohere_api_key = os.environ.get('cohere_api_key')
 openai.api_key = os.environ.get('openai_api_key')
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/")
 def hello_world():
