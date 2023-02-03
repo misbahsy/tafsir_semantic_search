@@ -37,7 +37,7 @@ mypy-extensions==0.4.3
 numpy
 openai==0.26.4
 packaging==23.0
-pandas==1.5.3
+pandas
 Pillow==9.4.0
 pinecone-client==2.1.0
 protobuf==3.20.3
