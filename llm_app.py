@@ -4,7 +4,7 @@ import cohere
 import pinecone
 import openai
 
-st.header("This is a simple App to answer questions about the Quran")
+st.subheader("This is an app to answer questions from the Quran (with references)")
 
 #  storing api keys both cohere and pinecone
 pinecone_api_key = 'cf643833-3fee-4700-9ac7-f0f90635a544'
