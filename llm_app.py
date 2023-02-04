@@ -7,8 +7,8 @@ import openai
 st.subheader("This is an app to answer questions from the Quran (with references)")
 
 #  storing api keys both cohere and pinecone
-pinecone_api_key = 'cf643833-3fee-4700-9ac7-f0f90635a544'
-cohere_api_key = 'z1DuayqafzKLEH4pOVHAPoDqKW5Gahqsut7mu00s'
+pinecone_api_key = st.secrets[pinecone_API_key]
+cohere_api_key = st.secrets[cohere_API_key]
 
 # initializing cohere and pinecone
 co = cohere.Client(cohere_api_key)
@@ -70,7 +70,7 @@ def retrieve(query):
 
 
 # get API key from top-right dropdown on OpenAI website
-openai.api_key = "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"
+openai.api_key = st.secrets[openai_API_key]
 
 
 def complete(prompt):
