@@ -1,2 +1,2 @@
 # tafsir_semantic_search
-This repo is for semantic search app to search over Quran tafsir books
+This repo powers AskQuran webapp - An AI based chatbot trained on the Quran verses to answer questions from the Quran.
